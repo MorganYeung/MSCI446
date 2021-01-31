@@ -1,6 +1,6 @@
 ---
 title: 'Lab Report 1'
-author: "Morgan Yeung"
+author: "Andy Tan, Tong (Amy?) Wu and Morgan Yeung"
 geometry: margin=.75in
 output:
   pdf_document: default
@@ -30,31 +30,16 @@ Give basic insights into your numeric variable you have picked as output variabl
 - What is median of the output value among different classes of the categorical variable you picked? You must use `group_by` and `summarize` functions.
 ```{r}
 library('tidyverse')
-library('ggplot2')
 theme_set(theme_minimal())
 # Step 1
-data <- read.csv("data/anime/anime.csv")
-class(data$genre)
-data$genre <- as.factor(data$genre)
-# Step 2
-data %>%
-  select(rank:popularity,genre)
-  group_by(genre)
-  # Step 3
-  summarise(min_popularity = min(popularity))
-  summarise(max_popularity = max(popularity))
-  summarise(mid_popularity = median(popularity))
-
-ggplot(aes(x = genre, y = min_popularity, fill = genre)) +
-    geom_bar(stat = "identity") +
-    theme_classic() +
-    labs(
-        x = "genre",
-        y = "Min Popularity",
-        title = paste(
-            "Min Popularity of Different Anime Genres"
-        )
-    )
+data <- read.csv("data/anime.csv")
+data.smaller <- select(data,popularity,genre)
+group_by(data.smaller,genre)%>%
+summarise(min_popularity = min(popularity))
+group_by(data.smaller,genre)%>%
+summarise(max_popularity = max(popularity))
+group_by(data.smaller,genre)%>%
+summarise(mid_popularity = median(popularity))
 
 ```
 
@@ -66,7 +51,8 @@ Visualize the variables you selected.
 - Draw distribution of the output variable $Y$ with respect to the different classes of your categorical variable. The plot must somehow show the distributional differences among different classes. You can use boxplot, histogram, or other visuals (e.g. density ringes).
 
 - Draw scatter plot between one of your numeric inputs and the output variable. Discuss whether the plot indicate a relation, if it is linear, if there are outliers? Feel free to remove the outlier. Feel free to transform the data.
-
+```{r}
+```
 
 ### 1.3. (15 pts) 
 
